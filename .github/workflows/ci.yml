@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Build image
-        run: docker build -f lab3/Dockerfile -t api-test .
+        run: docker build -t api-test .
       - name: Run API test
         run: docker run --rm api-test
       - name: Check exit code on test failure
