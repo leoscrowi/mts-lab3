@@ -1,0 +1,16 @@
+name: Lab3
+
+on: [push, workflow_dispatch]
+
+jobs:
+  api-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+      - name: Build image
+        run: docker build -f lab3/Dockerfile -t api-test .
+      - name: Run API test
+        run: docker run --rm api-test
+      - name: Check exit code on test failure
+        run: "! docker run --rm -e REST_BASE_URL=http://1234532534 api-test"
